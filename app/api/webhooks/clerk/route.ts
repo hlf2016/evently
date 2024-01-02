@@ -59,6 +59,7 @@ export async function POST(req: Request) {
   console.log("Webhook body:", body);
 
   if (eventType === "user.created") {
+
     const { id, email_addresses, image_url, first_name, last_name, username } = evt.data;
     const user = {
       clerkId: id,
@@ -70,6 +71,8 @@ export async function POST(req: Request) {
     }
 
     const newUser = await createUser(user)
+
+
 
     if (newUser) {
       await clerkClient.users.updateUserMetadata(id, {
@@ -97,6 +100,7 @@ export async function POST(req: Request) {
   }
 
   if (eventType === 'user.deleted') {
+    console.log('user deleted start')
     const { id } = evt.data
     const deletedUser = await deleteUser(id!)
     return NextResponse.json({ message: 'OK', user: deletedUser })
