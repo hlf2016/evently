@@ -13,14 +13,14 @@ export interface IEvent extends Document {
   isFree: boolean;
   url?: string;
   category: { _id: string, name: string };
-  organizer: { _id: string, firstName: string, lastName:string };
+  organizer: { _id: string, firstName: string, lastName: string };
 }
 
 const EventSchema = new Schema({
   title: { type: String, required: true },
   description: { type: String },
   location: { type: String },
-  createdAt: { type: Date, default:Date.now },
+  createdAt: { type: Date, default: Date.now },
   imageUrl: { type: String, required: true },
   startDateTime: { type: Date, default: Date.now },
   endDateTime: { type: Date, default: Date.now },
@@ -31,6 +31,6 @@ const EventSchema = new Schema({
   organizer: { type: Schema.Types.ObjectId, ref: 'User' },
 })
 
-const Event = models.User || model('Event', EventSchema)
+const Event = models.Event || model('Event', EventSchema)
 
 export default Event
